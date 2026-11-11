@@ -1,0 +1,890 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+:root {
+  --radius: 0.625rem;
+  --paper: oklch(0.91 0.046 78);
+  --paper-light: oklch(0.95 0.033 78);
+  --paper-shadow: oklch(0.84 0.051 69);
+  --ink: oklch(0.27 0.039 47);
+  --ink-soft: oklch(0.42 0.035 49);
+  --vermilion: oklch(0.48 0.15 31);
+  --paper-line: oklch(0.47 0.036 51 / 25%);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-light);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-light);
+  --popover-foreground: var(--ink);
+  --primary: var(--vermilion);
+  --primary-foreground: oklch(0.96 0.025 76);
+  --secondary: oklch(0.86 0.039 75);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.87 0.032 76);
+  --muted-foreground: var(--ink-soft);
+  --accent: oklch(0.85 0.046 71);
+  --accent-foreground: var(--ink);
+  --destructive: var(--vermilion);
+  --destructive-foreground: oklch(0.96 0.025 76);
+  --border: var(--paper-line);
+  --input: var(--paper-line);
+  --ring: var(--vermilion);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: var(--paper-light);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--vermilion);
+  --sidebar-primary-foreground: oklch(0.96 0.025 76);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--paper-line);
+  --sidebar-ring: var(--vermilion);
+}
+
+.dark {
+  --paper: oklch(0.25 0.026 48);
+  --paper-light: oklch(0.3 0.03 48);
+  --paper-shadow: oklch(0.21 0.023 48);
+  --ink: oklch(0.91 0.035 76);
+  --ink-soft: oklch(0.76 0.034 75);
+  --vermilion: oklch(0.67 0.13 34);
+  --paper-line: oklch(0.75 0.035 75 / 27%);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-light);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-light);
+  --popover-foreground: var(--ink);
+  --primary: var(--vermilion);
+  --primary-foreground: oklch(0.19 0.025 47);
+  --secondary: oklch(0.34 0.03 49);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.33 0.026 49);
+  --muted-foreground: var(--ink-soft);
+  --accent: oklch(0.37 0.037 51);
+  --accent-foreground: var(--ink);
+  --destructive: var(--vermilion);
+  --destructive-foreground: oklch(0.19 0.025 47);
+  --border: var(--paper-line);
+  --input: var(--paper-line);
+  --ring: var(--vermilion);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: var(--paper-light);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--vermilion);
+  --sidebar-primary-foreground: oklch(0.19 0.025 47);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--paper-line);
+  --sidebar-ring: var(--vermilion);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-mono);
+}
+
+.portfolio-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  min-height: 100vh;
+  background-color: var(--paper);
+  background-image: radial-gradient(ellipse at 50% 30%, var(--paper-light), transparent 78%);
+  color: var(--ink);
+}
+
+.portfolio-shell::before {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  inset: 0;
+  opacity: 0.22;
+  background-image: radial-gradient(var(--paper-shadow) 0.35px, transparent 0.65px);
+  background-size: 5px 5px;
+  mix-blend-mode: multiply;
+}
+
+.portfolio-scene {
+  position: fixed;
+  z-index: 0;
+  inset: 0 0 0 auto;
+  width: min(82vw, 1380px);
+  height: 100svh;
+  pointer-events: none;
+  transform: translateX(clamp(24px, 9vw, 140px));
+}
+
+.portfolio-scene img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  filter: grayscale(1) contrast(1.12);
+  opacity: 0.46;
+  transition: opacity 800ms ease;
+}
+
+.portfolio-scene[data-active-chapter="work"] img {
+  opacity: 0.56;
+}
+
+.portfolio-scene[data-active-chapter="practice"] img {
+  opacity: 0.7;
+}
+
+.portfolio-scene[data-active-chapter="contact"] img {
+  opacity: 0.84;
+}
+
+.portfolio-header {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--paper-line);
+  padding: 0 clamp(22px, 6vw, 92px);
+  color: var(--ink);
+}
+
+.wordmark,
+.chapter-nav,
+.chapter-nav a,
+.text-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wordmark {
+  gap: 11px;
+  color: var(--ink);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.wordmark-seal {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border: 1px solid var(--vermilion);
+  color: var(--vermilion);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.chapter-nav {
+  gap: clamp(19px, 3.2vw, 48px);
+}
+
+.chapter-nav a {
+  gap: 4px;
+  min-height: 44px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.chapter-nav a:hover,
+.chapter-nav a[aria-current="location"] {
+  color: var(--vermilion);
+}
+
+.portfolio-chapter {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  padding: 112px clamp(24px, 13vw, 200px) 90px clamp(24px, 13vw, 200px);
+  scroll-margin-top: 0;
+}
+
+.chapter-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 580px);
+  transform: translateX(clamp(-80px, -5vw, -20px));
+}
+
+.chapter-copy::before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  inset: -30% -160px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 40% 50%,
+    var(--paper) 0%,
+    color-mix(in oklab, var(--paper) 95%, transparent) 48%,
+    color-mix(in oklab, var(--paper) 65%, transparent) 68%,
+    transparent 82%
+  );
+}
+
+.intro-copy {
+  padding-top: 10px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 26px;
+  color: var(--ink-soft);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  color: var(--vermilion);
+}
+
+.chapter-copy h1,
+.chapter-copy h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 94px);
+  font-weight: 500;
+  line-height: 0.88;
+}
+
+.chapter-copy h1 em,
+.chapter-copy h2 em {
+  color: var(--vermilion);
+  font-weight: 400;
+}
+
+.intro-description,
+.chapter-lede {
+  max-width: 410px;
+  margin: 27px 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+.intro-skills {
+  max-width: 470px;
+  margin: 20px 0 0;
+  color: var(--ink-soft);
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.text-link {
+  gap: 12px;
+  min-height: 48px;
+  margin-top: 30px;
+  border-bottom: 1px solid var(--vermilion);
+  color: var(--ink);
+  font-size: 10px;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.text-link:hover {
+  gap: 18px;
+  color: var(--vermilion);
+}
+
+.intro-caption {
+  position: absolute;
+  right: clamp(24px, 7vw, 105px);
+  bottom: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-soft);
+  font-size: 8px;
+}
+
+.caption-rule,
+.aside-rule {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background-color: var(--vermilion);
+}
+
+.chapter-stamp {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--vermilion);
+  color: var(--vermilion);
+  font-family: var(--font-display);
+  font-size: 28px;
+  opacity: 0.78;
+}
+
+.intro-stamp {
+  top: 24%;
+  right: 12%;
+  transform: rotate(7deg);
+}
+
+.work-chapter {
+  justify-content: space-between;
+  gap: 6vw;
+  padding-top: 120px;
+}
+
+.work-copy {
+  width: min(47%, 550px);
+  flex: 0 0 47%;
+}
+
+.work-chapter .chapter-copy h2,
+.practice-chapter .chapter-copy h2,
+.contact-chapter .chapter-copy h2 {
+  font-size: clamp(51px, 6.4vw, 82px);
+}
+
+.work-chapter .chapter-lede,
+.practice-chapter .chapter-lede,
+.contact-chapter .chapter-lede {
+  max-width: 390px;
+  font-size: 19px;
+}
+
+.work-list {
+  max-width: 490px;
+  margin-top: 27px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 35px 1fr 18px;
+  align-items: center;
+  gap: 12px;
+  min-height: 80px;
+  border-bottom: 1px solid var(--paper-line);
+  color: var(--ink-soft);
+}
+
+.work-index {
+  align-self: start;
+  padding-top: 20px;
+  color: var(--vermilion);
+  font-size: 11px;
+}
+
+.work-row h3,
+.practice-list h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.work-row p,
+.practice-list p {
+  margin: 5px 0 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.work-row svg {
+  color: var(--vermilion);
+}
+
+.work-stamp {
+  top: 17%;
+  left: clamp(10px, 1.5vw, 24px);
+  transform: rotate(-7deg);
+}
+
+.practice-chapter {
+  justify-content: space-between;
+  gap: 7vw;
+}
+
+.practice-copy {
+  width: min(57%, 620px);
+}
+
+.practice-list {
+  max-width: 540px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.practice-list li {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: start;
+  border-top: 1px solid var(--paper-line);
+  padding: 18px 0;
+}
+
+.practice-list li > span {
+  padding-top: 8px;
+  color: var(--vermilion);
+  font-size: 11px;
+}
+
+.practice-aside {
+  display: flex;
+  width: min(27vw, 300px);
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4vw 0 0;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.brush-circle {
+  display: grid;
+  width: clamp(135px, 18vw, 225px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid color-mix(in oklab, var(--ink-soft) 62%, transparent);
+  border-radius: 47% 53% 45% 55% / 54% 45% 55% 46%;
+  color: var(--vermilion);
+  font-family: var(--font-display);
+  font-size: 50px;
+  transform: rotate(-12deg);
+}
+
+.brush-circle span {
+  transform: rotate(12deg);
+}
+
+.practice-aside > p:first-of-type {
+  margin: 22px 0 12px;
+  font-size: 8px;
+}
+
+.practice-aside > p,
+.practice-aside .aside-note,
+.contact-mark small {
+  text-shadow:
+    0 0 6px var(--paper),
+    0 0 12px var(--paper),
+    0 0 20px var(--paper);
+}
+
+.aside-note {
+  max-width: 185px;
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.contact-chapter {
+  min-height: 92svh;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 130px;
+}
+
+.contact-copy {
+  width: min(62%, 630px);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 30px;
+  margin-top: 12px;
+}
+
+.contact-links .text-link {
+  margin-top: 18px;
+}
+
+.contact-mark {
+  display: flex;
+  width: min(21vw, 260px);
+  aspect-ratio: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--vermilion);
+  color: var(--vermilion);
+  transform: rotate(4deg);
+}
+
+.contact-mark > span {
+  font-family: var(--font-display);
+  font-size: clamp(74px, 12vw, 150px);
+  line-height: 0.82;
+}
+
+.contact-mark small {
+  margin-top: 16px;
+  font-size: 8px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.portfolio-footer {
+  position: absolute;
+  right: clamp(24px, 6vw, 92px);
+  bottom: 22px;
+  left: clamp(24px, 6vw, 92px);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--paper-line);
+  padding-top: 14px;
+  color: var(--ink-soft);
+  font-size: 8px;
+}
+
+.footer-year {
+  color: var(--vermilion);
+}
+
+.chapter-progress {
+  position: fixed;
+  z-index: 6;
+  top: 50%;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  transform: translateY(-50%);
+}
+
+.progress-mark {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid transparent;
+  color: var(--ink-soft);
+  font-size: 8px;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.progress-mark.is-active {
+  border-color: var(--vermilion);
+  color: var(--vermilion);
+}
+
+@media (max-width: 800px) {
+  .portfolio-scene {
+    width: 100vw;
+    transform: none;
+  }
+
+  .portfolio-scene img {
+    opacity: 0.31;
+  }
+
+  .portfolio-scene[data-active-chapter="work"] img {
+    opacity: 0.42;
+  }
+
+  .portfolio-scene[data-active-chapter="practice"] img {
+    opacity: 0.54;
+  }
+
+  .portfolio-scene[data-active-chapter="contact"] img {
+    opacity: 0.66;
+  }
+
+  .portfolio-chapter {
+    padding-right: 58px;
+    padding-left: clamp(24px, 9vw, 72px);
+  }
+
+  .intro-copy,
+  .work-copy,
+  .practice-copy,
+  .contact-copy {
+    width: min(100%, 560px);
+    flex-basis: auto;
+    transform: translateX(-10px);
+  }
+
+  .work-chapter {
+    align-items: center;
+    gap: 20px;
+  }
+
+  .practice-aside {
+    width: 25vw;
+    margin-right: 0;
+  }
+
+  .chapter-progress {
+    right: 9px;
+  }
+}
+
+@media (max-width: 560px) {
+  .portfolio-header {
+    height: 65px;
+    padding: 0 19px;
+  }
+
+  .chapter-nav {
+    gap: 15px;
+  }
+
+  .chapter-nav a {
+    font-size: 9px;
+  }
+
+  .portfolio-chapter {
+    min-height: 100svh;
+    padding: 100px 48px 78px 24px;
+  }
+
+  .chapter-copy h1 {
+    font-size: clamp(55px, 15vw, 76px);
+  }
+
+  .chapter-copy h2,
+  .work-chapter .chapter-copy h2,
+  .practice-chapter .chapter-copy h2,
+  .contact-chapter .chapter-copy h2 {
+    font-size: clamp(49px, 13vw, 68px);
+  }
+
+  .intro-description,
+  .chapter-lede {
+    max-width: 320px;
+    font-size: 19px;
+  }
+
+  .intro-caption {
+    right: 50px;
+    bottom: 30px;
+    font-size: 7px;
+  }
+
+  .caption-rule {
+    width: 19px;
+  }
+
+  .intro-stamp {
+    top: 17%;
+    right: 11%;
+  }
+
+  .work-chapter {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .work-list {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .work-row {
+    min-height: 70px;
+  }
+
+  .work-row h3,
+  .practice-list h3 {
+    font-size: 23px;
+  }
+
+  .work-row p,
+  .practice-list p {
+    max-width: none;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .work-stamp {
+    top: 15%;
+    left: auto;
+    right: 6%;
+  }
+
+  .practice-chapter {
+    align-items: center;
+  }
+
+  .practice-aside {
+    display: none;
+  }
+
+  .practice-list {
+    margin-top: 24px;
+  }
+
+  .contact-chapter {
+    align-items: flex-start;
+    padding-bottom: 115px;
+  }
+
+  .contact-mark {
+    position: absolute;
+    right: 53px;
+    bottom: 122px;
+    width: 94px;
+    opacity: 0.78;
+  }
+
+  .contact-mark > span {
+    font-size: 61px;
+  }
+
+  .contact-mark small {
+    margin-top: 8px;
+    font-size: 5px;
+  }
+
+  .portfolio-footer {
+    right: 19px;
+    left: 19px;
+    font-size: 7px;
+  }
+
+  .chapter-progress {
+    gap: 7px;
+    right: 7px;
+  }
+
+  .progress-mark {
+    width: 24px;
+    height: 24px;
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

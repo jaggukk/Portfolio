@@ -1,0 +1,4 @@
+- [x] Build a pagoda-inspired, scroll-led 3D portfolio for Jagan KK.
+- [x] Verify the main scroll sequence on desktop and mobile, and check preview diagnostics.
+- [x] Replace the 3D pagoda with the supplied ink outline and darken its lines by chapter.
+- [ ] Verify the scroll states on the preview and check diagnostics.
