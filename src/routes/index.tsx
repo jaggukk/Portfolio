@@ -14,13 +14,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio of Jagan K K, a Computer Science graduate from Kannur, Kerala, building backend systems, AI/ML pipelines and full-stack tools.",
+          "Portfolio of Jagan K K, a software developer from Kannur, Kerala, building backend systems, AI/ML pipelines and full-stack tools.",
       },
       { property: "og:title", content: "Jagan K K — Software Engineer" },
       {
         property: "og:description",
         content:
-          "Computer Science graduate from Kannur, Kerala. Projects across backend systems, AI/ML and full-stack development.",
+          "Software developer from Kannur, Kerala. Projects across backend systems, AI/ML and full-stack development.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -125,10 +125,10 @@ function Portfolio() {
             <br />
             <em>Curious.</em>
             <br />
-            CS graduate.
+            Software developer.
           </h1>
           <p className="intro-description">
-            I’m Jagan K K, a Computer Science graduate from Kannur, Kerala, with a strong interest
+            I’m Jagan K K, a software developer from Kannur, Kerala, with a strong interest
             in programming, game development and emerging technologies like Artificial Intelligence
             and Machine Learning.
           </p>
@@ -306,11 +306,11 @@ function Portfolio() {
           <span>J</span>
           <small>
             JAGAN K K<br />
-            COMPUTER SCIENCE GRADUATE
+            SOFTWARE DEVELOPER
           </small>
         </div>
         <footer className="portfolio-footer">
-          <span>JAGAN K K · COMPUTER SCIENCE GRADUATE</span>
+          <span>JAGAN K K · SOFTWARE DEVELOPER</span>
           <span>
             KANNUR, KERALA · <span className="footer-year">2026</span>
           </span>
