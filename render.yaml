@@ -1,0 +1,19 @@
+# Render blueprint for the portfolio site.
+# Builds a Nitro Node server from this repo and serves it on Render.
+services:
+  - type: web
+    name: jaggukk-portfolio
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      # The project's default Vite/Nitro target is Cloudflare Workers.
+      # Render needs the Node server preset instead.
+      - key: NITRO_PRESET
+        value: node-server
+      - key: NODE_VERSION
+        value: "22"
